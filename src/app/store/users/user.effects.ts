@@ -1,18 +1,23 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { switchMap, map, catchError } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { UserActions } from './user.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { selectSelectedUserId } from './user.selector';
+import { of } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
+  private store = inject(Store);
   private actions$ = inject(Actions);
+
   private userService = inject(UserService);
 
   loadUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserActions.loadUsers),
-      mergeMap(() =>
+      switchMap(() =>
         this.userService.getUsers().pipe(
           map((users) => UserActions.loadUsersSuccess({ users })),
           catchError((err) =>
@@ -21,5 +26,18 @@ export class UserEffects {
         )
       )
     )
+  );
+
+  loadSelectedUser$ = createEffect(
+    () =>
+      this.store.select(selectSelectedUserId).pipe(
+        switchMap((id) => {
+          if (id === null) return [];
+          return this.userService
+            .getUserDetails(id)
+            .pipe(map((user) => UserActions.updateUser({ user })));
+        })
+      ),
+    { dispatch: true }
   );
 }
