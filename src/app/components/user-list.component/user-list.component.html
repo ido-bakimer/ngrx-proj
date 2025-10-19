@@ -1,17 +1,17 @@
-<div>
+<div class="user-list-cont">
 
     <div *ngIf="loading$ | async">Loading users...</div>
 
-    <div>
-        <ul>
-            <li *ngFor="let user of users$ | async">
-                {{ user.name }}
-                <button (click)="deleteUser(user.id)">Delete</button>
-                <button (click)="editUser(user)">Edit</button>
-                <button (click)="selectUser(user.id)">Select</button>
-            </li>
-        </ul>
+    <ul class="user-list">
+        <li *ngFor="let user of users$ | async">
+            {{ user.name }}
+            <button (click)="deleteUser(user.id)">Delete</button>
+            <button (click)="editUser(user)">Edit</button>
+            <button (click)="selectUser(user.id)">Select</button>
+        </li>
+    </ul>
 
+    <div>
         <h3>Add New User</h3>
         <input [(ngModel)]="newUserName" placeholder="User Name" />
         <button (click)="addUser()">Add</button>
@@ -19,7 +19,7 @@
         <div *ngIf="editingUser">
             <h3>Edit User</h3>
             <input [(ngModel)]="editingUserName" placeholder="New Name" />
-            <button (click)="updateUser()">Save</button>
+            <button (click)="updateUser()" class="mr">Save</button>
             <button (click)="cancelEdit()">Cancel</button>
         </div>
 
@@ -40,6 +40,7 @@
             <p>{{ summary.userName }} total spending: ${{ summary.total }}</p>
         </div>
     </div>
+
 
 
 </div>

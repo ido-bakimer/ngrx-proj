@@ -12,6 +12,7 @@ import { UserTotalComponent } from './user-total.component';
   standalone: true,
   imports: [CommonModule, UserNameComponent, UserTotalComponent],
   templateUrl: './user-orders.component.html',
+  styleUrls: ['./user-orders.component.scss'],
 })
 export class UserOrdersComponent {
   private store = inject(Store);

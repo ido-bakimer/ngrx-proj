@@ -1,0 +1,29 @@
+.user-orders {
+  display: block;
+  margin: 32px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.buttons{
+  display: flex;
+  gap: 10px;
+}
+button {
+  background-color: #61dafb;
+  color: #fff;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #21a1f1;
+  }
+}

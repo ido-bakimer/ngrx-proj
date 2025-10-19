@@ -8,8 +8,10 @@ import { UserOrdersComponent } from './components/users-orders/user-orders.compo
   imports: [UserListComponent, UserOrdersComponent],
   template: `
     <h1>Ngrx Users App</h1>
-    <app-user-list></app-user-list>
-    <app-user-orders></app-user-orders>
+    <div class="main-cont">
+      <app-user-list></app-user-list>
+      <app-user-orders></app-user-orders>
+    </div>
   `,
 })
 export class AppComponent {}

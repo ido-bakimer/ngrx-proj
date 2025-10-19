@@ -1,8 +1,7 @@
 :host {
   display: block;
-  max-width: 800px;
-  margin: 32px auto;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 32px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   background-color: #fdfdfd;
   border-radius: 12px;
@@ -10,18 +9,30 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
+.user-list-cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  &.user-list {
+    overflow-y: scroll;
+    max-height: 500px;
+    overflow-x: hidden;
+  }
 
   li {
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #fafafa;
-    padding: 12px 16px; 
-    margin-bottom: 8px; 
+    padding: 12px 16px;
+    margin-bottom: 8px;
     border-radius: 8px;
     transition: transform 0.2s ease, background 0.2s ease;
 
@@ -31,12 +42,12 @@ ul {
     }
 
     button {
-      margin-left: 8px; 
-      padding: 5px 10px; 
+      margin-left: 8px;
+      padding: 5px 10px;
       border: none;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 14px; 
+      font-size: 14px;
       transition: background 0.2s ease, color 0.2s ease;
 
       &:hover {
@@ -44,37 +55,37 @@ ul {
       }
 
       &:nth-child(2) {
-        background-color: #ff6961; 
+        background-color: #ff6961;
         color: white;
       }
 
       &:nth-child(3) {
-        background-color: #f0ad4e; 
+        background-color: #f0ad4e;
         color: white;
       }
 
       &:nth-child(4) {
-        background-color: #61dafb; 
+        background-color: #61dafb;
         color: white;
       }
     }
   }
 }
 
-
 h3 {
-  margin-top: 24px; 
-  font-size: 19px; 
+  margin-top: 24px;
+  font-size: 19px;
   color: #2c3e50;
 }
 
 input {
-  padding: 8px 12px; 
+  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 16px; 
-  width: calc(100% - 24px); 
-  margin-right: 8px; 
+  font-size: 16px;
+  width: calc(100% - 24px);
+  margin-right: 8px;
+  margin-bottom: 10px;
 
   &:focus {
     outline: none;
@@ -86,7 +97,7 @@ input {
 button {
   background-color: #61dafb;
   color: #fff;
-  padding: 7px 14px; 
+  padding: 7px 14px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -103,17 +114,17 @@ button {
 .user-summary {
   background: #e3f2fd;
   border-radius: 10px;
-  padding: 16px; 
-  margin-top: 16px; 
+  padding: 16px;
+  margin-top: 16px;
 
   h3 {
     margin-top: 0;
   }
 
   ul {
-    margin-top: 8px; 
+    margin-top: 8px;
     li {
-      padding: 4px 0; 
+      padding: 4px 0;
     }
   }
 }
@@ -121,5 +132,5 @@ button {
 .flex {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
 }
