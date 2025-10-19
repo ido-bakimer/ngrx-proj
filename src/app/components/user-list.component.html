@@ -1,42 +1,45 @@
-<div *ngIf="loading$ | async">Loading users...</div>
+<div>
 
-<ul>
-  <li *ngFor="let user of users$ | async">
-    {{ user.name }}
-    <button (click)="deleteUser(user.id)">Delete</button>
-    <button (click)="editUser(user)">Edit</button>
-    <button (click)="selectUser(user.id)">Select</button> 
-  </li>
-</ul>
+    <div *ngIf="loading$ | async">Loading users...</div>
 
-<hr />
+    <div>
+        <ul>
+            <li *ngFor="let user of users$ | async">
+                {{ user.name }}
+                <button (click)="deleteUser(user.id)">Delete</button>
+                <button (click)="editUser(user)">Edit</button>
+                <button (click)="selectUser(user.id)">Select</button>
+            </li>
+        </ul>
 
-<h3>Add New User</h3>
-<input [(ngModel)]="newUserName" placeholder="User Name" />
-<button (click)="addUser()">Add</button>
+        <h3>Add New User</h3>
+        <input [(ngModel)]="newUserName" placeholder="User Name" />
+        <button (click)="addUser()">Add</button>
 
-<div *ngIf="editingUser">
-  <h3>Edit User</h3>
-  <input [(ngModel)]="editingUserName" placeholder="New Name" />
-  <button (click)="updateUser()">Save</button>
-  <button (click)="cancelEdit()">Cancel</button>
-</div>
+        <div *ngIf="editingUser">
+            <h3>Edit User</h3>
+            <input [(ngModel)]="editingUserName" placeholder="New Name" />
+            <button (click)="updateUser()">Save</button>
+            <button (click)="cancelEdit()">Cancel</button>
+        </div>
 
-<hr />
+        <div *ngIf="selectedUser$ | async as user">
+            <h3>Selected User</h3>
+            <p>{{ user.name }}</p>
+        </div>
 
-<div *ngIf="selectedUser$ | async as user">
-  <h3>Selected User</h3>
-  <p>{{ user.name }}</p>
-</div>
+        <div *ngIf="selectedUserOrders$ | async as orders">
+            <h3>Orders of Selected User</h3>
+            <ul>
+                <li *ngFor="let o of orders">{{ o.id }}: ${{ o.total }}</li>
+            </ul>
+        </div>
 
-<div *ngIf="selectedUserOrders$ | async as orders">
-  <h3>Orders of Selected User</h3>
-  <ul>
-    <li *ngFor="let o of orders">{{ o.id }}: ${{ o.total }}</li>
-  </ul>
-</div>
+        <div *ngIf="userSummary$ | async as summary">
+            <h3>User Summary</h3>
+            <p>{{ summary.userName }} total spending: ${{ summary.total }}</p>
+        </div>
+    </div>
 
-<div *ngIf="userSummary$ | async as summary">
-  <h3>User Summary</h3>
-  <p>{{ summary.userName }} total spending: ${{ summary.total }}</p>
+
 </div>
