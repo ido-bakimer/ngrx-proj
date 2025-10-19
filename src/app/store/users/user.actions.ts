@@ -12,5 +12,6 @@ export const UserActions = createActionGroup({
     'Update User': props<{ user: User }>(),
     'Delete User': props<{ id: number }>(),
     'Save User': props<{ user: User }>(),
+    'Select User': props<{ id: number }>(),
   },
 });

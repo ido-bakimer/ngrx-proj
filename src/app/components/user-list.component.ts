@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-user-list',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './user-list.component.html', // or inline template as above
+  templateUrl: './user-list.component.html',
 })
 export class UserListComponent {
   private store = inject(Store);
@@ -17,10 +17,8 @@ export class UserListComponent {
   users$ = this.store.select(selectAllUsers);
   loading$ = this.store.select(selectLoading);
 
-  // For adding new user
   newUserName = '';
 
-  // For editing existing user
   editingUser: { id: number; name: string } | null = null;
   editingUserName = '';
 
@@ -58,7 +56,6 @@ export class UserListComponent {
     this.editingUserName = '';
   }
 
-  // Delete a user
   deleteUser(id: number) {
     this.store.dispatch(UserActions.deleteUser({ id }));
   }

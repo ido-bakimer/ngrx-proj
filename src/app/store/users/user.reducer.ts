@@ -15,7 +15,6 @@ export const userReducer = createReducer(
     error,
   })),
 
-  // ADD / UPDATE (prevent duplicate IDs)
   on(UserActions.saveUser, (state, { user }) => {
     const exists = state.entities[user.id];
     return exists
@@ -23,6 +22,10 @@ export const userReducer = createReducer(
       : userAdapter.addOne(user, state);
   }),
 
-  // DELETE
-  on(UserActions.deleteUser, (state, { id }) => userAdapter.removeOne(id, state))
+  on(UserActions.deleteUser, (state, { id }) => userAdapter.removeOne(id, state)) ,
+
+  on(UserActions.selectUser, (state, { id }) => ({
+  ...state,
+  selectedUserId: id
+})),
 );
