@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserActions } from '../store/user.actions';
-import { selectUsers, selectLoading } from '../store/user.selector';
+import { selectAllUsers, selectLoading } from '../store/user.selector';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 })
 export class UserListComponent {
   private store = inject(Store);
-  users$ = this.store.select(selectUsers);
+  users$ = this.store.select(selectAllUsers);
   loading$ = this.store.select(selectLoading);
 
   ngOnInit() {
