@@ -44,8 +44,9 @@ export const userReducer = createReducer(
   ),
 
   on(UserActions.saveUser, (state, { user }) => {
-    return state.entities[user.id]
-      ? userAdapter.updateOne({ id: user.id, changes: user }, state)
-      : userAdapter.addOne(user, state);
-  })
+  const existing = state.entities[user.id];
+  return existing
+    ? userAdapter.updateOne({ id: user.id, changes: user }, state)
+    : userAdapter.addOne(user, state);
+}),
 );
