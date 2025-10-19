@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { UserActions } from './user.actions';
-import { User } from '../services/user.service';
+import { User } from '../../services/user.service';
 
 export const userAdapter = createEntityAdapter<User>({
   selectId: (user) => user.id,

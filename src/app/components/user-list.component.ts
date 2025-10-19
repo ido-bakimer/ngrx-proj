@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../store/user.actions';
-import { selectAllUsers, selectLoading } from '../store/user.selector';
+import { UserActions } from '../store/users/user.actions';
+import { selectAllUsers, selectLoading } from '../store/users/user.selector';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
