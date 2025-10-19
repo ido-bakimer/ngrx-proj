@@ -1,4 +1,3 @@
-// main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';

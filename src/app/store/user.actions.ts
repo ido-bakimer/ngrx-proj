@@ -1,4 +1,3 @@
-// user.actions.ts
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { User } from '../services/user.service';
 

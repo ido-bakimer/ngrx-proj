@@ -1,12 +1,14 @@
+// app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { UserListComponent } from './components/user-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [UserListComponent],
+  template: `
+    <h1>Users</h1>
+    <app-user-list></app-user-list>
+  `,
 })
-export class AppComponent {
-  title = 'ngrx-users';
-}
+export class AppComponent {}
