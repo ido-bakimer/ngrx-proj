@@ -1,11 +1,15 @@
 <div class="user-orders">
-  <h2>User Orders Demo</h2>
+    <h2>User Orders Demo</h2>
 
-  <!-- Buttons to change selected user -->
-  <div class="buttons">
-    <button (click)="selectUser(1)">Select User 1</button>
-    <button (click)="selectUser(2)">Select User 2</button>
-    <button (click)="selectUser(3)">Select User 3</button>
-  </div>
+    <div class="buttons">
+        <button (click)="selectUser(1)">Select User 1</button>
+        <button (click)="selectUser(2)">Select User 2</button>
+        <button (click)="selectUser(3)">Select User 3</button>
+    </div>
+
+    <ng-container *ngIf="summary$ | async as summary">
+        <app-user-name [summary]="summary"></app-user-name>
+        <app-user-total [summary]="summary"></app-user-total>
+    </ng-container>
 
 </div>
