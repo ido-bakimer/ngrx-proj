@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+.main-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  background: #efefef;
+  padding: 30px;
+  margin: -8px;
+}
+
+app-user-orders {
+  display: block;
+  margin: 32px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fdfdfd;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mr{
+    margin-right: 10px;
+}
