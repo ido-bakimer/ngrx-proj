@@ -28,24 +28,21 @@ export class UserListComponent {
     this.store.dispatch(UserActions.loadUsers());
   }
 
-  // Add a new user
   addUser() {
     if (!this.newUserName.trim()) return;
     const newUser = {
-      id: Math.floor(Math.random() * 1000), // generate random ID for demo
+      id: Math.floor(Math.random() * 1000), 
       name: this.newUserName.trim(),
     };
     this.store.dispatch(UserActions.saveUser({ user: newUser }));
     this.newUserName = '';
   }
 
-  // Start editing a user
   editUser(user: { id: number; name: string }) {
     this.editingUser = { ...user };
     this.editingUserName = user.name;
   }
 
-  // Save updated user
   updateUser() {
     if (!this.editingUser) return;
     const updatedUser = {

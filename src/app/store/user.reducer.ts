@@ -4,7 +4,7 @@ import { UserActions } from './user.actions';
 import { User } from '../services/user.service';
 
 export const userAdapter = createEntityAdapter<User>({
-  selectId: (user) => user.id, 
+  selectId: (user) => user.id,
 });
 
 export interface UserState extends EntityState<User> {
@@ -37,5 +37,15 @@ export const userReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
+
+  on(UserActions.deleteUser, (state, { id }) =>
+    userAdapter.removeOne(id, state)
+  ),
+
+  on(UserActions.saveUser, (state, { user }) => {
+    return state.entities[user.id]
+      ? userAdapter.updateOne({ id: user.id, changes: user }, state)
+      : userAdapter.addOne(user, state);
+  })
 );
