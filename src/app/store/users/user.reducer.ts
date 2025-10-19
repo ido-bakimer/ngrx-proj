@@ -1,52 +1,28 @@
 import { createReducer, on } from '@ngrx/store';
-import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { UserActions } from './user.actions';
-import { User } from '../../services/user.service';
-
-export const userAdapter = createEntityAdapter<User>({
-  selectId: (user) => user.id,
-});
-
-export interface UserState extends EntityState<User> {
-  loading: boolean;
-  error?: string;
-}
-
-export const initialState: UserState = userAdapter.getInitialState({
-  loading: false,
-  error: undefined,
-});
+import { userAdapter, initialUserState } from './user.state';
 
 export const userReducer = createReducer(
-  initialState,
+  initialUserState,
 
-  // start loading
-  on(UserActions.loadUsers, (state) => ({
-    ...state,
-    loading: true,
-    error: undefined,
-  })),
-
-  // when success - set all users
+  on(UserActions.loadUsers, (state) => ({ ...state, loading: true })),
   on(UserActions.loadUsersSuccess, (state, { users }) =>
     userAdapter.setAll(users, { ...state, loading: false })
   ),
-
-  // failure
   on(UserActions.loadUsersFailure, (state, { error }) => ({
     ...state,
     loading: false,
     error,
   })),
 
-  on(UserActions.deleteUser, (state, { id }) =>
-    userAdapter.removeOne(id, state)
-  ),
-
+  // ADD / UPDATE (prevent duplicate IDs)
   on(UserActions.saveUser, (state, { user }) => {
-  const existing = state.entities[user.id];
-  return existing
-    ? userAdapter.updateOne({ id: user.id, changes: user }, state)
-    : userAdapter.addOne(user, state);
-}),
+    const exists = state.entities[user.id];
+    return exists
+      ? userAdapter.updateOne({ id: user.id, changes: user }, state)
+      : userAdapter.addOne(user, state);
+  }),
+
+  // DELETE
+  on(UserActions.deleteUser, (state, { id }) => userAdapter.removeOne(id, state))
 );
