@@ -2,8 +2,14 @@ import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserActions } from '../store/users/user.actions';
 import { selectAllUsers, selectLoading } from '../store/users/user.selector';
+import {
+  selectSelectedUser,
+  selectOrdersOfSelectedUser,
+  selectUserSummary,
+} from '../store/app.selectors';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { User } from '../services/user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -17,8 +23,11 @@ export class UserListComponent {
   users$ = this.store.select(selectAllUsers);
   loading$ = this.store.select(selectLoading);
 
-  newUserName = '';
+  selectedUser$ = this.store.select(selectSelectedUser);
+  selectedUserOrders$ = this.store.select(selectOrdersOfSelectedUser);
+  userSummary$ = this.store.select(selectUserSummary);
 
+  newUserName = '';
   editingUser: { id: number; name: string } | null = null;
   editingUserName = '';
 
@@ -28,22 +37,22 @@ export class UserListComponent {
 
   addUser() {
     if (!this.newUserName.trim()) return;
-    const newUser = {
-      id: Math.floor(Math.random() * 1000), 
+    const newUser: User = {
+      id: Math.floor(Math.random() * 1000),
       name: this.newUserName.trim(),
     };
     this.store.dispatch(UserActions.saveUser({ user: newUser }));
     this.newUserName = '';
   }
 
-  editUser(user: { id: number; name: string }) {
+  editUser(user: User) {
     this.editingUser = { ...user };
     this.editingUserName = user.name;
   }
 
   updateUser() {
     if (!this.editingUser) return;
-    const updatedUser = {
+    const updatedUser: User = {
       id: this.editingUser.id,
       name: this.editingUserName.trim(),
     };
@@ -58,5 +67,9 @@ export class UserListComponent {
 
   deleteUser(id: number) {
     this.store.dispatch(UserActions.deleteUser({ id }));
+  }
+
+  selectUser(id: number) {
+    this.store.dispatch(UserActions.selectUser({ id }));
   }
 }
